@@ -10,6 +10,8 @@ describe Anyway::Config, type: :config do
     specify { expect(CoolConfig.config_name).to eq "cool" }
     specify { expect(CoolConfig.env_prefix).to eq "COOL" }
 
+    it { binding.pry }
+
     describe "defaults" do
       specify { expect(CoolConfig.defaults[:port]).to eq 8080 }
       specify { expect(CoolConfig.defaults[:host]).to eq "localhost" }

@@ -24,5 +24,10 @@ module Anyway # :nodoc:
 
     # Make sure loaders are not changed in runtime
     config.after_initialize { Anyway.loaders.freeze }
+
+    # Load raketasks when gem is required in Rails
+    rake_tasks do
+      load "tasks/anyway_config.rake"
+    end
   end
 end

@@ -9,4 +9,7 @@ class CoolConfig < Anyway::Config # :nodoc:
     user: {name: "admin", password: "admin"}
 
   coerce_types host: :string, user: {dob: :date}
+
+  attr_description meta: "Meta information about Cool",
+                   port: "Port to run CoolServer on"
 end
