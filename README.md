@@ -1008,6 +1008,39 @@ end
 
 Yeah, a lot of annotations 😞 Welcome to the type-safe world!
 
+## Describing environment variables
+### Setup
+#### On `rails`
+You don't have to do anything special, task will be loaded when rails requires 'anyway_config'
+#### Off `rails`
+Add the following to your Rakefile
+```ruby
+anyway_config_spec = Gem::Specification.find_by_name 'anyway_config'
+load "#{anyway_config_spec.gem_dir}/lib/anyway/tasks/anyway_config.rake"
+```
+### Usage
+Run `rake anyway_config:describe_environment` to generate `ENVIRONMENT.md`file with available environment variables, their defaults, and their descriptions.
+To add description to your variables use `description`
+
+Example config:
+```ruby
+class CoolConfig < Anyway::Config
+  attr_config foo: 1, bar: 'Baz'
+  attr_config :baz
+
+  required :baz
+
+  description foo: 'Amount of `foo` to use',
+              bar: 'Text for `bar` message'
+end
+```
+Example output:
+| Variable      | Default value | Required | Description |
+| ------------- | ------------- | ---- |----------------------- |
+| COOL_FOO      | 1             |      | Amount of `foo` to use |
+| COOL_BAR      | 'Baz'         |      | Text for `bar` message |
+| COOL_BAZ      |               | true |                        |
+
 ## Contributing
 
 Bug reports and pull requests are welcome on GitHub at [https://github.com/palkan/anyway_config](https://github.com/palkan/anyway_config).

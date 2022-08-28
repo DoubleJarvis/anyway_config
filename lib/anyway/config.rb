@@ -136,11 +136,11 @@ module Anyway # :nodoc:
         required_attributes.push(*names)
       end
 
-      def attr_description(attr_descriptions)
+      def description(attr_descriptions)
         unknown_names = attr_descriptions.keys - config_attributes
         raise ArgumentError, "Unknown config param: #{unknown_names.join(",")}" if unknown_names.any?
 
-        described_attributes.merge!(attr_descriptions)
+        attribute_descriptions.merge!(attr_descriptions)
       end
 
       def filter_by_env(names, env)
@@ -175,11 +175,11 @@ module Anyway # :nodoc:
         end
       end
 
-      def described_attributes
-        return @described_attributes if instance_variable_defined?(:@described_attributes)
+      def attribute_descriptions
+        return @attribute_descriptions if instance_variable_defined?(:@attribute_descriptions)
 
-        @described_attributes = if superclass < Anyway::Config
-          superclass.described_attributes.dup
+        @attribute_descriptions = if superclass < Anyway::Config
+          superclass.attribute_descriptions.dup
         else
           {}
         end
